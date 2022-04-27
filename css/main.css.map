@@ -1,0 +1,19 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "../scss/main.scss",
+        "../scss/_variables.scss",
+        "../scss/_fonts.scss",
+        "../scss/_normalize.scss",
+        "../scss/_mixins.scss",
+        "../scss/blocks/_blocks.scss",
+        "../scss/blocks/_container.scss",
+        "../scss/blocks/_header.scss",
+        "../scss/blocks/_hero.scss",
+        "../scss/blocks/_main.scss",
+        "../scss/blocks/_footer.scss"
+    ],
+    "names": [],
+    "file": "main.css"
+}
