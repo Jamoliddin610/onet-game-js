@@ -1,0 +1,69 @@
+.game__list{
+    width: 100%;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-flow: wrap row;
+}
+.game__items{
+    width: 90px;
+    height: 90px;
+    border: solid 2px rgba(23, 23, 23, 0);
+    padding: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+.game__box{
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: cadetblue;
+    border-radius: 5px;
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+    .game-line{
+        display: block;
+        width: 90px !important;
+        height: 10px ;
+        animation-name: myAnime ;
+        animation-duration: 1s;
+        position: absolute;
+    }
+    @keyframes myAnime {
+        0%{
+            background-color: red;
+        }
+        100%{
+            background-color: transparent;
+        }
+    }
+    .game-line-y{
+        display: block;
+        width: 10px !important;
+        height: 90px !important;
+        animation-name: myAnimey ;
+        animation-duration: 1s;
+        position: absolute;
+    }
+    @keyframes myAnimey {   
+        0%{
+            background-color: red;
+        }
+        100%{   
+            background-color: transparent;
+        }
+    }
