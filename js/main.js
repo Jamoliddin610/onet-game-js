@@ -123,438 +123,136 @@ boxshik.forEach((imgs) => {
         }
     })
 })
+
+
+
+
+
+boxshik.forEach((item) => {
+    item.addEventListener("click", () => {
+        clicked(item)
+    })
+})
 let newArr = []
 let firstIndex = 0
 let secondIndex = 0
-let thirdIndex = 0
 let count = 1
-boxshik.forEach((item) => {
-    item.addEventListener("click", () => {
-        let cardinat = item.className.split(' ')
-        let idiat = item.id
-        cardinat.shift()
-        cardinat.push(idiat)
-        newArr.push(cardinat)
-        if (count == 2) {
-            firstIndex = newArr[0]
-            secondIndex = newArr[1]
-            if (firstIndex[0] == secondIndex[0] && firstIndex[1] == secondIndex[1]) {
-                count = 0
-            } else if (firstIndex[0] == secondIndex[0] && firstIndex[2] == secondIndex[2]) {
-                // removeBorder(firstIndex, secondIndex)
-                removeX(firstIndex, secondIndex)
 
-            } else if (firstIndex[1] == secondIndex[1] && firstIndex[2] == secondIndex[2]) {
-                removeY(firstIndex, secondIndex)
-                // removeBorderY(firstIndex, secondIndex)
-
-            } else if (firstIndex[2] == secondIndex[2]) {
-                remove(firstIndex, secondIndex)
-            }
-
-
+function clicked(item) {
+    let cardinat = item.className.split(' ')
+    let idiat = item.id
+    cardinat.shift()
+    cardinat.push(idiat)
+    newArr.push(cardinat)
+    if (count == 2) {
+        firstIndex = newArr[0]
+        secondIndex = newArr[1]
+        if (firstIndex[0] == secondIndex[0] && firstIndex[1] == secondIndex[1]) {
             count = 0
-            firstIndex = 0
-            secondIndex = 0
+        } else if (firstIndex[2] == secondIndex[2]) {
+            finderX(firstIndex, secondIndex)
         }
-        if (newArr.length >= 2) {
-            newArr = []
-        }
-        count++
-    })
-})
-
-function removeX(first, second) {
-    boxshik.forEach((item) => {
-        let start = first[1].split('')
-        let finish = second[1].split('')
-        let starter = 0
-        let finisher = 0
-        let strfnsh = []
-        let abs = finish[2].concat(finish[3])
-        for (let i = 0; i <= start.length; i++) {
-            if (!isNaN(start[i])) {
-                starter = start[i]
-            }
-        }
-        if (finish.length == 4) {
-            finisher = Number(abs)
-        } else {
-            for (let i = 0; i <= finish.length; i++) {
-                if (!isNaN(finish[i])) {
-                    finisher = finish[i]
-                }
-            }
-        }
-        for (let i = starter; i < finisher; i++) {
-            strfnsh.push(i)
-        }
-        strfnsh.shift()
-        if (strfnsh.length != 0) {
-            strfnsh.forEach((elem) => {
-                if (item.parentNode.className.includes(`y_${elem}`) && item.parentNode.className.includes(first[0])) {
-                    if (!item.parentNode.className.includes('busy')) {
-                        boxshik.forEach((el) => {
-                            if (el.className.includes(first[0]) && el.className.includes(first[1])) {
-                                el.parentNode.classList.remove('busy')
-                                el.innerHTML = '<span  class="game-line" ></span >'
-                                item.innerHTML = '<span  class="game-line" ></span >'
-
-                            }
-                            if (el.className.includes(second[0]) && el.className.includes(second[1])) {
-                                el.parentNode.classList.remove('busy')
-                                el.innerHTML = '<span  class="game-line" ></span >'
-                                item.innerHTML = '<span  class="game-line" ></span >'
-
-
-
-                            }
-                        })
-                    }
-                }
-            })
-        } else {
-            if (item.className.includes(first[0]) && item.className.includes(first[1])) {
-                item.parentNode.classList.remove('busy')
-
-                item.innerHTML = '<span  class="game-line" ></span >'
-
-            }
-            if (item.className.includes(second[0]) && item.className.includes(second[1])) {
-                item.parentNode.classList.remove('busy')
-                item.innerHTML = '<span  class="game-line" ></span >'
-
-
-            }
-        }
-    })
+        count = 0
+        firstIndex = 0
+        secondIndex = 0
+    }
+    if (newArr.length >= 2) {
+        newArr = []
+    }
+    count++
 }
 
-function removeY(first, second) {
-    boxshik.forEach((item) => {
-        let start = first[0].split('')
-        let finish = second[0].split('')
-        let starter = 0
-        let finisher = 0
-        let strfnsh = []
-        let abs = finish[2].concat(finish[3])
-        for (let i = 0; i <= start.length; i++) {
-            if (!isNaN(start[i])) {
-                starter = start[i]
-            }
-        }
+function finderX(a, b) {
+    let start = a[0].split('')
+    let finish = a[1].split('')
+    console.log(start,finish);
+    maker(start, finish, b)
+}
+
+function maker(start, finish, b) {
+    let starter = 0
+    let finisher = 0
+    let abs = finish[2].concat(finish[3])
+    let abc = start[2].concat(start[3])
+    if (finish.length == 4) {
+        finisher = Number(abs)
+    } else {
         for (let i = 0; i <= finish.length; i++) {
             if (!isNaN(finish[i])) {
                 finisher = finish[i]
             }
         }
-        for (let i = starter; i < finisher; i++) {
-            strfnsh.push(i)
-        }
-        strfnsh.shift()
-        if (strfnsh.length != 0) {
-            strfnsh.forEach((elem) => {
-                if (item.parentNode.className.includes(`y_${elem}`) && item.parentNode.className.includes(first[0])) {
-                    if (!item.parentNode.className.includes('busy')) {
-                        boxshik.forEach((el) => {
-                            if (el.className.includes(first[0]) && el.className.includes(first[1])) {
-                                el.innerHTML = '<span  class="game-line-y" ></span >'
-                                item.innerHTML = '<span  class="game-line-y" ></span >'
-
-                            }
-                            if (el.className.includes(second[0]) && el.className.includes(second[1])) {
-                                el.innerHTML = '<span  class="game-line-y" ></span >'
-                                item.innerHTML = '<span  class="game-line-y" ></span >'
-
-
-                            }
-                        })
-                    }
-                }
-            })
-        } else {
-            if (item.className.includes(first[0]) && item.className.includes(first[1])) {
-                item.parentNode.classList.remove('busy')
-                item.innerHTML = '<span  class="game-line-y" ></span >'
-
-            }
-            if (item.className.includes(second[0]) && item.className.includes(second[1])) {
-                item.parentNode.classList.remove('busy')
-                item.innerHTML = '<span  class="game-line-y"></span >'
-
-
-            }
-        }
-    })
-}
-
-
-function remove(a, b) {
-    elemnts.forEach((items) => {
-        let karobka = ''
-        let kbk = ''
-
-        if (items.className.includes(a[0]) && items.className.includes(b[1])) {
-            karobka = items.className
-            kbk = karobka.split(' ')
-        }
-        let start = kbk[1]
-        let finish = kbk[2]
-        let starter = 0
-        let finisher = 0
-
-        if (start != undefined) {
-            start.split(''),
-                finish.split('')
-            let abs = finish[2].concat(finish[3])
-
-            for (let i = 0; i <= start.length; i++) {
-                if (!isNaN(start[i])) {
-                    starter = start[i]
-                }
-            }
-            if (finish.length == 4) {
-                finisher = Number(abs)
-            } else {
-                for (let i = 0; i <= finish.length; i++) {
-                    if (!isNaN(finish[i])) {
-                        finisher = finish[i]
-                    }
-                }
-            }
-            console.log(starter,finisher);
-        }
-        elemnts.forEach((el)=>{
-            let anb = a[1].split('')
-            let ana = b[1].split('')
-            let anber = 0
-            let bnber = 0
-            let abrer = anb[2].concat(anb[3])
-            let barer = ana[2].concat(ana[3])
-            for (let i = 0; i <= anb.length; i++) {
-                if (!isNaN(anb[i])) {
-                    anber = anb[i]
-                }
-            }
-            if (anb.length == 4) {
-                anber = Number(abrer)
-            } else {
-                for (let i = 0; i <= anb.length; i++) {
-                    if (!isNaN(anb[i])) {
-                        anber = anb[i]
-                    }
-                }
-            }
-            for (let i = 0; i <= ana.length; i++) {
-                if (!isNaN(ana[i])) {
-                    bnber = ana[i]
-                }
-            }
-            if (ana.length == 4) {
-                bnber = Number(barer)
-            } else {
-                for (let i = 0; i <= ana.length; i++) {
-                    if (!isNaN(ana[i])) {
-                        bnber = ana[i]
-                    }
-                }
-            }
-            let nk = Number(anber)+1
-            let bk = Number(bnber)+1
-            console.log(bk);
-            if (el.className.includes(a[0])) {
-                console.log('ok');
-                for (let i = nk; i <= finisher; i++) {
-                    if (el.className.includes(`y_${i}`) && !el.className.includes('busy')  ){
-                        boxshik.forEach((elem) => {
-                            if (elem.className.includes(a[0]) && elem.className.includes(a[1])) {
-                                elem.innerHTML = '<span  class="game-line-y" ></span >'
-                                el.innerHTML = '<span  class="game-line" ></span >'
-
-                            }
-                            if (elem.className.includes(b[0]) && elem.className.includes(b[1])) {
-                                elem.innerHTML = '<span  class="game-line-y" ></span >'
-                                el.innerHTML = '<span  class="game-line" ></span >'
-
-
-                            }
-                        })
-                    }
-                }
-            } else if(el.className.includes(a[1])){
-                console.log('mttt');
-                for (let i = bk; i <= bnber; i++) {
-                    console.log(i + '       salom');
-                    if (el.className.includes(`y_${i}`) && !el.className.includes('busy')) {
-                        boxshik.forEach((elem) => {
-                            if (elem.className.includes(a[0]) && elem.className.includes(a[1])) {
-                                elem.innerHTML = '<span  class="game-line-y" ></span >'
-                                el.innerHTML = '<span  class="game-line" ></span >'
-
-                            }
-                            if (elem.className.includes(b[0]) && elem.className.includes(b[1])) {
-                                elem.innerHTML = '<span  class="game-line-y" ></span >'
-                                el.innerHTML = '<span  class="game-line" ></span >'
-
-
-                            }
-                        })
-                    }
-                }
-            }
-
-        })
-    })
-}
-function removeBorder(first,second) {
-    boxshik.forEach((item)=>{
-        let startX = first[0].split('')
-        let num = Number(startX[2])-1
-        let nub = Number(startX[2])+1
-        let start = first[1].split('')
-        let finish = second[1].split('')
-        let starter = 0
-        let finisher = 0
-        let strfnsh = []
-        let abs = finish[2].concat(finish[3])
+    }
+    if (start.length == 4) {
+        starter = Number(abc)
+    } else {
         for (let i = 0; i <= start.length; i++) {
             if (!isNaN(start[i])) {
                 starter = start[i]
             }
         }
-        if (finish.length == 4) {
-            finisher = Number(abs)
-        } else {
-            for (let i = 0; i <= finish.length; i++) {
-                if (!isNaN(finish[i])) {
-                    finisher = finish[i]
-                }
+    }
+    remov(starter, finisher, b)
+}
+
+function remov(x, y, b) {
+    elemnts.forEach((item) => {
+        if (item.className.includes(`x_${x-1}`) && item.className.includes(`y_${y}`) ) {
+            if (item.className.includes('busy')) {
+                rem(item, b, x, y)
+            } else {
+                findrem(item, b)
             }
         }
-        for (let i = starter; i <= finisher; i++) {
-            strfnsh.push(i)
+
+        if (item.className.includes(`x_${x}`) && item.className.includes(`y_${y + 1}`) ) {
+            if (item.className.includes('busy')) {
+                rem(item, b, x, y)
+            } else {
+                findrem(item, b)
+
+            }
         }
+        if (item.className.includes(`x_${x + 2}`) && item.className.includes(`y_${y}`) ) {
+            if (item.className.includes('busy')) {
+                rem(item, b, x, y)
+            } else {
+                findrem(item, b)
 
-        if (item.className.includes(first[0]) && item.className.includes(first[1])) {
-            console.log(item);
-            elemnts.forEach((elem)=>{
-                strfnsh.forEach((el)=>{
-                    if (elem.className.includes(`x_${num}`)) {
-                        if (elem.className.includes(`y_${el}`)) {
-                            if (!elem.className.includes('busy')) {
-                                boxshik.forEach((el) => {
-                                    if (el.className.includes(first[0]) && el.className.includes(first[1])) {
-                                        el.parentNode.classList.remove('busy')
-                                        el.innerHTML = '<span  class="game-line-y" ></span >'
-                                        elem.innerHTML = '<span  class="game-line" ></span >'
+            }
 
-                                    }
-                                    if (el.className.includes(second[0]) && el.className.includes(second[1])) {
-                                        el.parentNode.classList.remove('busy')
-                                        el.innerHTML = '<span  class="game-line-y" ></span >'
-                                        elem.innerHTML = '<span  class="game-line" ></span >'
-                                    }
-                                })
-                            }
-                        }
-                    } else if (elem.className.includes(`x_${nub}`)) {
-                        if (elem.className.includes(`y_${el}`)) {
-                            if (!elem.className.includes('busy')) {
-                                boxshik.forEach((el) => {
-                                    if (el.className.includes(first[0]) && el.className.includes(first[1])) {
-                                        el.parentNode.classList.remove('busy')
-                                        el.innerHTML = '<span  class="game-line-y" ></span >'
-                                        elem.innerHTML = '<span  class="game-line" ></span >'
-
-                                    }
-                                    if (el.className.includes(second[0]) && el.className.includes(second[1])) {
-                                        el.parentNode.classList.remove('busy')
-                                        el.innerHTML = '<span  class="game-line-y" ></span >'
-                                        elem.innerHTML = '<span  class="game-line" ></span >'
-                                    }
-                                })
-                            }
-                        }
-                    }
-                })
-            })
-        }else{
-            removeX(first,second)
         }
-    }) 
+        if (item.className.includes(`x_${x}`) && item.className.includes(`y_${y-1}`) ) {
+            if (item.className.includes('busy')) {
+                rem(item, b, x, y)
+            } else {
+                findrem(item, b)
+
+            }
+
+        }
+    })
 }
-// function removeBorderY(first, second) {
-//     boxshik.forEach((item) => {
-//         let startX = first[0].split('')
-//         let num = Number(startX[1]) - 1
-//         let nub = Number(startX[1]) + 1
-//         let start = first[0].split('')
-//         let finish = second[0].split('')
-//         let starter = 0
-//         let finisher = 0
-//         let strfnsh = []
-//         let abs = finish[2].concat(finish[3])
-//         for (let i = 0; i <= start.length; i++) {
-//             if (!isNaN(start[i])) {
-//                 starter = start[i]
-//             }
-//         }
-//         if (finish.length == 4) {
-//             finisher = Number(abs)
-//         } else {
-//             for (let i = 0; i <= finish.length; i++) {
-//                 if (!isNaN(finish[i])) {
-//                     finisher = finish[i]
-//                 }
-//             }
-//         }
-//         for (let i = starter; i <= finisher; i++) {
-//             strfnsh.push(i)
-//         }
 
-//         if (item.className.includes(first[0]) && item.className.includes(first[1])) {
-//             console.log(item);
-//             elemnts.forEach((elem) => {
-//                 strfnsh.forEach((el) => {
-//                     if (elem.className.includes(`x_${num}`)) {
-//                         if (elem.className.includes(`y_${el}`)) {
-//                             if (!elem.className.includes('busy')) {
-//                                 boxshik.forEach((el) => {
-//                                     if (el.className.includes(first[0]) && el.className.includes(first[1])) {
-//                                         el.parentNode.classList.remove('busy')
-//                                         el.innerHTML = '<span  class="game-line" ></span >'
-//                                         elem.innerHTML = '<span  class="game-line-y" ></span >'
+function rem(item, b, x, y) {
+    if (item.firstChild.className.includes(b[0]) && item.firstChild.className.includes(b[1])) {
+        item.classList.remove('busy')
+        item.firstChild.style.display = `none`
+        boxshik.forEach((elem) => {
+            if (elem.className.includes(`x_${x}`) && elem.className.includes(`y_${y}`)) {
+                elem.style.display = `none`
+                elem.parentNode.classList.remove('busy')
 
-//                                     }
-//                                     if (el.className.includes(second[0]) && el.className.includes(second[1])) {
-//                                         el.parentNode.classList.remove('busy')
-//                                         el.innerHTML = '<span  class="game-line" ></span >'
-//                                         elem.innerHTML = '<span  class="game-line-y" ></span >'
-//                                     }
-//                                 })
-//                             }
-//                         }
-//                     } else if (elem.className.includes(`x_${nub}`)) {
-//                         if (elem.className.includes(`y_${el}`)) {
-//                             if (!elem.className.includes('busy')) {
-//                                 boxshik.forEach((el) => {
-//                                     if (el.className.includes(first[0]) && el.className.includes(first[1])) {
-//                                         el.parentNode.classList.remove('busy')
-//                                         el.innerHTML = '<span  class="game-line" ></span >'
-//                                         elem.innerHTML = '<span  class="game-line-y" ></span >'
+            }
+        })
+    }
+}
 
-//                                     }
-//                                     if (el.className.includes(second[0]) && el.className.includes(second[1])) {
-//                                         el.parentNode.classList.remove('busy')
-//                                         el.innerHTML = '<span  class="game-line" ></span >'
-//                                         elem.innerHTML = '<span  class="game-line-y" ></span >'
-//                                     }
-//                                 })
-//                             }
-//                         }
-//                     }
-//                 })
-//             })
-//         }
-//     })
-// }
+function findrem(item, b) {
+    let cardinat = item.className.split(' ')
+    cardinat.shift()
+    console.log(item);
+    item.style.background = 'red'
+
+        finderX(cardinat,b)
+}
